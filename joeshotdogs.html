@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+</head>
+
+<body>
+    <script language="javascript">
+        // constants for prices
+        const hotdogPrice = 4.8;
+        const frenchFriesPrice = 3.95;
+        const drinksPrice = 1.99;
+
+        // make sure there are two decimal places
+        function showMoney(floatNum) {
+            // round to only have two (or less) decimal places
+            let floatAsString = "";
+            let multBy100 = floatNum * 100;
+            let rounded = Math.round(multBy100);
+            let floatRounded = rounded / 100;
+
+            // check if  there are zero, one, or two decimal places
+            if (floatRounded % 1 == 0) {
+                floatAsString = floatRounded + ".00";
+            } else if (floatRounded * 10 % 1 == 0) {
+                floatAsString = floatRounded + "0";
+            } else {
+                floatAsString = floatAsString + floatRounded;
+            }
+            return floatAsString;
+        }
+
+        // prompt users
+        let numDogs = prompt("How many hotdogs do you want?");
+        let numFries = prompt("How many fries do you want?");
+        let numSoda = prompt("How many sodas do you want?");
+
+        // display title
+        document.write('<h1 style="color: #e83a23; font-family: \'Bangers\',  cursive; font-size: 30px; text-align: center;"> Welcome to Joe\'s Hotdogs</h1>');
+
+        // get price for the total amount of each item
+        let dogsTotalPrice = hotdogPrice * numDogs;
+        let friesTotalPrice = frenchFriesPrice * numFries;
+        let sodaTotalPrice = drinksPrice * numSoda;
+
+        // display hotdogs
+        document.write('<p style="color: #000000; font-family: \'Arial\', sans-serif; font-size: 22px; text-align: center;">' + "Hotdogs x" + numDogs + " - $" + showMoney(dogsTotalPrice) + "</br>" + '</p>');
+        
+        // display fries
+        document.write('<p style="color: #000000; font-family: \'Arial\', sans-serif; font-size: 22px; text-align: center;">' + "French Fries x" + numFries + " - $" + showMoney(friesTotalPrice) + "</br>" + '</p>');
+
+        // display soda
+        document.write('<p style="color: #000000; font-family: \'Arial\', sans-serif; font-size: 22px; text-align: center;">' + "Soda x" + numSoda + " - $" + showMoney(sodaTotalPrice) + "</br>" + '</p>');
+
+        // calculate subtotal
+        let subtotal = dogsTotalPrice + friesTotalPrice + sodaTotalPrice;
+
+        // display subtotal before discount
+        document.write('<p style="color: #000000; font-family: \'Arial\', sans-serif; font-size: 15px; text-align: center;">' + "Subtotal before discount: $" + showMoney(subtotal) + '</br>' + '</p>');
+
+        // if 25 or above apply discount
+        if (subtotal >= 25) {
+            let discountAmount = subtotal * 0.1;
+            subtotal = subtotal - discountAmount;
+            // display discount
+            document.write('<p style="color: #000000; font-family: \'Arial\', sans-serif; font-size: 15px; text-align: center;">' + "Discount: $" + showMoney(discountAmount) + '</br>' + '</p>');
+        } else {
+            document.write('<p style="color: #000000; font-family: \'Arial\', sans-serif; font-size: 15px; text-align: center;">' + "No discount applied" + '</br>' + '</p>');
+
+        }
+
+        // display subtotal after discount
+        document.write('<p style="color: #000000; font-family: \'Arial\', sans-serif; font-size: 15px; text-align: center;">' + "Subtotal after discount: $" + showMoney(subtotal) + '</br>' + '</p>');
+
+        // state tax
+        let tax = subtotal * 0.0625
+        subtotal = subtotal + tax;
+
+        // display tax
+        document.write('<p style="color: #000000; font-family: \'Arial\', sans-serif; font-size: 15px; text-align: center;">' + "Tax: $" + showMoney(tax) + '</br>' + '</p>');
+
+        // get final amount in proper format
+        let finalAmount = showMoney(subtotal);
+
+        // display final total
+        document.write('<p style="color: #000000; font-family: Arial; text-align: center; font-size: 30px; font-weight: bold">' + "Final Total: $" + finalAmount + '<p>');
+    </script>
+
+</body>
+
+</html>
